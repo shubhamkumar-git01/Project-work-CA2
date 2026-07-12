@@ -1,302 +1,249 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HelpMeFy - Amplifying Hope</title>
+  <title>Helpmefy</title>
   <link href="./output.css" rel="stylesheet" />
   <link rel="icon" href="help4.jpg" type="image/jpg" />
-  <!-- AOS Animation Library -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/your_kit_code.js" crossorigin="anonymous"></script>
   <style>
-    /* Custom Glassmorphism Utilities */
-    .glass-nav {
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    .zoom {
+      animation: zoomAnim 0.5s ease;
     }
-    .glass-card {
-      background: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    @keyframes zoomAnim {
+      from {
+        transform: scale(0.95);
+        opacity: 0.7;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
-    .hero-bg {
-      background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-      position: relative;
-      overflow: hidden;
+    .active {
+      background-color: #3b82f6;
     }
-    /* Animated Floating Shapes */
-    .shape {
-      position: absolute;
-      filter: blur(60px);
-      z-index: 0;
-      animation: float 10s infinite ease-in-out alternate;
-    }
-    .shape-1 { top: -10%; left: -10%; width: 400px; height: 400px; background: rgba(142, 197, 252, 0.6); }
-    .shape-2 { bottom: -10%; right: -10%; width: 500px; height: 500px; background: rgba(224, 195, 252, 0.6); animation-delay: 2s; }
-    
-    @keyframes float {
-      0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(50px) scale(1.1); }
-    }
-    /* Dropdown hover behavior */
-    .group:hover .dropdown-menu { display: block; }
+    .zoom {
+    animation: zoomAnim 0.5s ease;
+  }
+  @keyframes zoomAnim {
+    from { transform: scale(0.95); opacity: 0.7; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .active { background-color: #3b82f6; }
+
+  /* Dropdown hover behavior */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+  }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 font-sans antialiased overflow-x-hidden">
+<body class="bg-gray-100 scroll-smooth">
+  <div class="container min-h-screen bg-cover bg-[url('backgroundhome.png')] px-4 md:px-28 py-6">
+    <nav class="flex items-center justify-between mb-10">
+      <img src="logo.png" class="w-40 md:w-52 cursor-pointer" alt="Helpmefy Logo" />
+      <ul class="flex-1 text-center hidden md:flex justify-center space-x-6">
+        <li><a href="#" onclick="scrollToTop()" class="text-black hover:text-blue-600">Home</a></li>
+        
+        <!-- Updated About us with dropdown -->
+        <li class="relative group">
+          <div class="text-black hover:text-blue-600 cursor-pointer">About us</div>
+          <ul class="absolute left-0 mt-1 w-48 bg-white border border-gray-200 rounded shadow-lg hidden group-hover:block z-50">
+            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-blue-100">About Helpmefy</a></li>
+            <li><a href="aboutdev.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-100">About the Developers</a></li>
+            <li><a href="#" class="block px-4 py-2 text-gray-700 hover:bg-blue-100">Aim of Helpmefy</a></li>
+          </ul>
+        </li>
+        
+    
+        <li><a href="#contact" class="text-black hover:text-blue-600">Contact</a></li>
+        <li><a href="#" class="text-black hover:text-blue-600">Languages</a></li>
+      </ul>
+      <img src="indiaflag.png" class="w-10 cursor-pointer" alt="India Flag" />
+    </nav>
 
-  <!-- Fixed Navigation -->
-  <nav class="fixed w-full top-0 z-50 glass-nav transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-20">
-        <!-- Logo -->
-        <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
-          <img src="logo.png" class="h-12 w-auto" alt="HelpMeFy Logo" />
-        </div>
-        <!-- Desktop Menu -->
-        <div class="hidden md:flex space-x-8 items-center font-medium">
-          <a href="#home" class="text-gray-800 hover:text-purple-600 transition">Home</a>
-          <a href="#features" class="text-gray-800 hover:text-purple-600 transition">Features</a>
-          
-          <!-- Dropdown -->
-          <div class="relative group">
-            <button class="text-gray-800 hover:text-purple-600 transition flex items-center">
-              About Us <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+    <div class="flex flex-col md:flex-row gap-10 items-center justify-between bg-white shadow-xl rounded-xl p-8">
+      <div class="flex-1 space-y-4">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Helpmefy!! Simplifying Help, Amplifying Hope</h1>
+        <p class="text-gray-600">A place where we are always ready to help you.</p>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6 w-full pt-4">
+          <a href="login.html" class="flex-1 max-w-xs w-full">
+            <button class="w-full px-6 py-4 bg-red-600 hover:bg-red-700 text-white text-lg font-bold rounded-full shadow-lg transition-all duration-300">
+              Login / SignUp
             </button>
-            <div class="dropdown-menu absolute hidden pt-4 w-48 z-50">
-              <div class="bg-white rounded-lg shadow-xl border border-gray-100 overflow-hidden">
-                <a href="#contact" class="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700">Mission</a>
-                <a href="aboutdev.html" class="block px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700">The Architect</a>
-              </div>
-            </div>
-          </div>
-          
-          <a href="#contact" class="text-gray-800 hover:text-purple-600 transition">Contact</a>
-        </div>
-        <!-- CTA & Language -->
-        <div class="hidden md:flex items-center space-x-4">
-          <img src="indiaflag.png" class="w-8 h-8 object-cover rounded-full shadow-sm" alt="India" title="India" />
-          <a href="login.html" class="bg-gray-900 text-white px-5 py-2.5 rounded-full font-semibold hover:bg-purple-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-            Sign In
+          </a>
+          <a href="emergency.html" target="_blank" class="flex-1 max-w-xs w-full">
+            <button class="w-full px-6 py-4 bg-red-600 hover:bg-red-700 text-white text-lg font-bold rounded-full shadow-lg transition-all duration-300">
+              Emergency??
+            </button>
           </a>
         </div>
       </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero-bg min-h-screen flex items-center pt-20">
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-    
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <!-- Text Content -->
-        <div data-aos="fade-right" data-aos-duration="1000">
-          <span class="inline-block py-1 px-3 rounded-full bg-purple-100 text-purple-700 font-semibold text-sm mb-4 border border-purple-200">
-            Platform v2.0 Live
-          </span>
-          <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight mb-6">
-            Simplifying Help, <br>
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500">Amplifying Hope.</span>
-          </h1>
-          <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-lg leading-relaxed">
-            A next-generation community-driven platform connecting individuals in need with immediate peer-to-peer assistance during crises.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="login.html" class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold rounded-full shadow-lg hover:shadow-2xl transform hover:-translate-y-1 transition text-center text-lg">
-              Get Started Now
-            </a>
-            <a href="emergency.html" class="px-8 py-4 bg-red-600 text-white font-bold rounded-full shadow-lg hover:bg-red-700 hover:shadow-2xl transform hover:-translate-y-1 transition text-center text-lg flex items-center justify-center">
-              <svg class="w-5 h-5 mr-2 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
-              Emergency Alert
-            </a>
-          </div>
-        </div>
-        
-        <!-- Interactive Visual / Image -->
-        <div data-aos="fade-left" data-aos-duration="1000" class="relative">
-          <div class="glass-card p-4 rounded-3xl relative z-10 transform rotate-2 hover:rotate-0 transition duration-500">
-            <img src="help1.png" class="w-full rounded-2xl object-cover shadow-inner" alt="Community Help" />
-          </div>
-          <!-- Decorative element behind image -->
-          <div class="absolute inset-0 bg-gradient-to-tr from-purple-400 to-pink-300 rounded-3xl transform -rotate-3 scale-105 -z-10 opacity-50 blur-lg"></div>
-        </div>
+      <div class="flex-1">
+        <img src="help1.png" id="banner" class="rounded-lg shadow-lg w-full max-w-md mx-auto" alt="Help Image" />
+        <ul class="flex justify-center mt-4 space-x-2">
+          <li class="btn w-4 h-4 rounded-full bg-blue-400 cursor-pointer active"></li>
+          <li class="btn w-4 h-4 rounded-full bg-blue-200 cursor-pointer"></li>
+          <li class="btn w-4 h-4 rounded-full bg-blue-200 cursor-pointer"></li>
+          <li class="btn w-4 h-4 rounded-full bg-blue-200 cursor-pointer"></li>
+        </ul>
       </div>
     </div>
-  </section>
-
-  <!-- Image Carousel Banner -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
-    <div class="glass-card rounded-2xl overflow-hidden shadow-2xl p-2" data-aos="fade-up" data-aos-delay="200">
-      <div class="overflow-hidden rounded-xl relative group">
-        <div id="carouselImages" class="flex transition-transform duration-700 ease-in-out">
-          <img src="helpfoot3.png" class="w-full flex-shrink-0 object-cover h-64 md:h-[400px]" alt="Community Initiative 1" />
-          <img src="helpfoot2u.png" class="w-full flex-shrink-0 object-cover h-64 md:h-[400px]" alt="Community Initiative 2" />
-          <img src="helpfoot1.png" class="w-full flex-shrink-0 object-cover h-64 md:h-[400px]" alt="Community Initiative 3" />
-        </div>
-        <!-- Auto carousel script below handles movement -->
+  </div>
+  <!-- //////////////////////// -->
+  <!-- Single Image Carousel Section -->
+<div class="max-w-6xl mx-auto px-4 mt-[-60px] relative z-10"> <!-- removed bg-white to keep background visible -->
+  <div class="bg-white shadow-xl rounded-xl overflow-hidden w-full">
+    <div class="overflow-hidden rounded-xl relative">
+      <div id="carouselImages" class="flex transition-transform duration-500 ease-in-out w-full">
+        <img src="helpfoot3.png" class="w-full object-cover h-64 sm:h-80 md:h-96" alt="Slide 1" />
+        <img src="helpfoot2u.png" class="w-full object-cover h-64 sm:h-80 md:h-96" alt="Slide 2" />
+        <img src="helpfoot1.png" class="w-full object-cover h-64 sm:h-80 md:h-96" alt="Slide 3" />
       </div>
     </div>
-  </section>
-
-  <!-- Features Section -->
-  <section id="features" class="py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16" data-aos="fade-up">
-        <h2 class="text-base text-purple-600 font-semibold tracking-wide uppercase">Core Capabilities</h2>
-        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-          Everything you need to make an impact
-        </p>
+    <div class="flex justify-center mt-4 space-x-2 pb-4">
+      <button onclick="moveSlide(0)" class="w-3 h-3 rounded-full bg-blue-400"></button>
+      <button onclick="moveSlide(1)" class="w-3 h-3 rounded-full bg-blue-200"></button>
+      <button onclick="moveSlide(2)" class="w-3 h-3 rounded-full bg-blue-200"></button>
+    </div>
+  </div>
+</div>
+<section id="contact" class="bg-white py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto">
+  <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Get in Touch with Us</h2>
+  <div class="grid md:grid-cols-2 gap-10">
+    <!-- Contact Methods -->
+    <div class="space-y-6 text-blue-900">
+      <div class="flex items-center space-x-4">
+        <i class="fab fa-whatsapp text-green-500 text-2xl"></i>
+        <p class="text-lg font-medium">WhatsApp us: <a href="https://wa.me/911000100095" class="text-blue-600 hover:underline">+91-1000100095</a></p>
       </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-        <!-- Feature 1 -->
-        <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
-          <div class="w-14 h-14 bg-purple-100 rounded-xl flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Instant SOS Alerts</h3>
-          <p class="text-gray-600">Trigger immediate emergency alerts that broadcast to nearby registered volunteers and community members within seconds.</p>
-        </div>
-        <!-- Feature 2 -->
-        <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="200">
-          <div class="w-14 h-14 bg-pink-100 rounded-xl flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Peer-to-Peer Network</h3>
-          <p class="text-gray-600">Connect directly with people who need help or those who can offer it. Completely decentralized community support.</p>
-        </div>
-        <!-- Feature 3 -->
-        <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl transition transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="300">
-          <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
-            <svg class="w-7 h-7 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-3">Verified Profiles</h3>
-          <p class="text-gray-600">Secure backend architecture ensuring that helpers and requesters are authenticated and their data is protected.</p>
-        </div>
+      <div class="flex items-center space-x-4">
+        <i class="fas fa-envelope text-red-500 text-2xl"></i>
+        <p class="text-lg font-medium">Email us: <a href="mailto:support@helpmefy.com" class="text-blue-600 hover:underline">support@helpmefy.com</a></p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <i class="fas fa-fax text-indigo-500 text-2xl"></i>
+        <p class="text-lg font-medium">Fax us: +91-0612452445</p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <i class="fas fa-phone text-blue-500 text-2xl"></i>
+        <p class="text-lg font-medium">Call us: +91-1000100095</p>
+      </div>
+      <div class="flex items-center space-x-4">
+        <i class="fas fa-map-marker-alt text-pink-500 text-2xl"></i>
+        <p class="text-lg font-medium">Write to us: Lovely Professional University, Jalandhar - Delhi G.T. Road, Phagwara, Punjab, 144411</p>
       </div>
     </div>
-  </section>
 
-  <!-- Contact / Get in Touch -->
-  <section id="contact" class="py-24 bg-gray-50 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="glass-card rounded-3xl overflow-hidden" data-aos="fade-up">
-        <div class="grid lg:grid-cols-2">
-          <div class="p-12 lg:p-16 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-            <h2 class="text-3xl font-extrabold mb-6">Let's make a difference.</h2>
-            <p class="text-gray-300 mb-10 text-lg">Have a question or want to partner with us? Our support team is available 24/7 to assist you.</p>
-            
-            <div class="space-y-6">
-              <div class="flex items-center">
-                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4">
-                  <svg class="w-6 h-6 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0a12 12 0 1012 12A12.013 12.013 0 0012 0zm6.9 17.5l-1.3 4.2-4.1-1.2A9.9 9.9 0 0112 22a10 10 0 1110-10c0 1.9-.5 3.7-1.4 5.3l1.3 4.2z"></path></svg>
-                </div>
-                <div>
-                  <p class="text-sm text-gray-400">WhatsApp Support</p>
-                  <p class="font-semibold text-lg">+91-1000100095</p>
-                </div>
-              </div>
-              <div class="flex items-center">
-                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mr-4">
-                  <svg class="w-6 h-6 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                </div>
-                <div>
-                  <p class="text-sm text-gray-400">Email Address</p>
-                  <p class="font-semibold text-lg">support@helpmefy.com</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="p-12 lg:p-16 bg-white">
-            <form class="space-y-6">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                <input type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-600 focus:border-transparent transition" placeholder="John Doe">
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                <input type="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-600 focus:border-transparent transition" placeholder="john@example.com">
-              </div>
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                <textarea rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-600 focus:border-transparent transition" placeholder="How can we help?"></textarea>
-              </div>
-              <button type="submit" class="w-full bg-gray-900 text-white font-bold py-4 rounded-lg hover:bg-purple-700 transition shadow-lg">
-                Send Message
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
+    <!-- Contact Form -->
+    <div>
+      <form class="space-y-4">
+        <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <textarea placeholder="Your Message" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+        <button type="submit" class="bg-red-600 text-white px-6 py-3 rounded-full hover:bg-red-700 shadow-md font-bold">Send Message</button>
+      </form>
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="col-span-1 md:col-span-2">
-          <img src="logo.png" alt="Logo" class="h-10 mb-6 bg-white p-1 rounded">
-          <p class="text-gray-400 max-w-sm mb-6">When you give, 85% of every resource goes directly to our mission. Join the movement to make the world a safer place.</p>
-          <div class="flex space-x-4">
-            <a href="login.html" class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-full font-bold transition text-sm">Join Now</a>
-          </div>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-bold mb-4">Platform</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="#features" class="hover:text-white transition">Features</a></li>
-            <li><a href="aboutdev.html" class="hover:text-white transition">The Architect</a></li>
-            <li><a href="#" class="hover:text-white transition">Security</a></li>
-            <li><a href="#" class="hover:text-white transition">FAQ</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-lg font-bold mb-4">Legal</h3>
-          <ul class="space-y-2 text-gray-400">
-            <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
-            <li><a href="#" class="hover:text-white transition">Terms of Service</a></li>
-            <li><a href="#" class="hover:text-white transition">Data Protection</a></li>
-          </ul>
+  <footer class="bg-gray-900 text-white px-6 md:px-10 py-12 mt-10">
+    <div class="grid md:grid-cols-3 gap-8 mb-8">
+      <div>
+        <h3 class="text-lg font-semibold mb-3 text-blue-400 underline">Learn More</h3>
+        <ul class="space-y-2 text-blue-400">
+          <li><a href="#">Why Helpmefy?</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">What We Do</a></li>
+          <li><a href="#">Where We Work</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Ratings</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold mb-3 text-blue-400 underline">An organization you can trust</h3>
+        <p class="text-blue-300">When you give, 85% of every rupee goes directly to our mission. <a href="#" class="underline">Learn more about our commitment.</a></p>
+        <div class="flex space-x-4 mt-4">
+          <button class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-full shadow-md font-bold">DONATE NOW</button>
+          <button class="bg-red-600 hover:bg-red-700 px-6 py-3 rounded-full shadow-md font-bold">Whatsapp Support</button>
         </div>
       </div>
-      
-      <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-400 text-sm">
-        <p>&copy; 2026 HelpMeFy Platform. All rights reserved.</p>
-        <div class="flex space-x-4 mt-4 md:mt-0">
-          <span>Engineered by Shubham Kumar</span>
+      <div>
+        <h3 class="text-lg font-semibold mb-3 text-blue-400 underline">Contact Us</h3>
+        <p class="text-blue-300">Helpmefy HQ<br>Lovely Professional University, Jalandhar - Delhi G.T. Road,
+          Phagwara, Punjab (India) - 144411</p><br>
+        <p class="text-blue-300">Main Office: +91-1000100095 | Mon–Fri: 9:00am–5:00pm IST</p>
+        <p class="text-blue-300">Donor Services: +91-0612452445 | MonFri: 8:00am–5:00pm IST</p>
+        <p class="italic text-blue-300 mt-2">Report fraud, abuse, wrongdoing</p>
+        <p class="text-blue-300">Safeguarding</p>
+        <div class="flex space-x-4 mt-4 text-white text-xl">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
+    </div>
+    <div class="border-t border-gray-700 pt-6 text-sm text-blue-300 flex flex-col md:flex-row justify-between">
+      <div class="flex flex-wrap gap-3 mb-4 md:mb-0">
+        <a href="#" class="hover:underline">Privacy Policy</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Terms of Use</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Health Privacy</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Legal</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Finance</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Sitemap</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Newsroom</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Careers</a>
+        <span>|</span>
+        <a href="#" class="hover:underline">Contact Us</a>
+      </div>
+      <p class="text-blue-300">&copy; 2025 Helpmefy. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Slider Script -->
   <script>
-    // Initialize AOS Animation Library
-    AOS.init({
-      once: true,
-      offset: 50,
-      duration: 800,
+    const banner = document.getElementById("banner");
+    const btns = document.querySelectorAll(".btn");
+    const images = ["help1.png", "help2.jpg", "help3.jpg", "help4.jpg"];
+
+    btns.forEach((btn, index) => {
+      btn.addEventListener("click", () => {
+        banner.classList.add("zoom");
+        banner.src = images[index];
+        setTimeout(() => banner.classList.remove("zoom"), 500);
+
+        btns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
     });
-
-    // Auto Carousel Logic
     const carousel = document.getElementById("carouselImages");
-    let currentSlide = 0;
-    const totalSlides = 3;
 
-    setInterval(() => {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
-    }, 4000);
+  function moveSlide(index) {
+    const slideWidth = carousel.offsetWidth;
+    carousel.style.transform = `translateX(-${index * slideWidth}px)`;
+
+    // Dot styling (optional)
+    const dots = event.target.parentElement.querySelectorAll("button");
+    dots.forEach(dot => dot.classList.replace("bg-blue-400", "bg-blue-200"));
+    event.target.classList.replace("bg-blue-200", "bg-blue-400");
+  }
+  function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+  // Ensure container resizes with screen
+  window.addEventListener("resize", () => moveSlide(0));
   </script>
 </body>
 </html>
