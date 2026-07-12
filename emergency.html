@@ -1,132 +1,184 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Emergency Services</title>
+  <title>Emergency Services | HelpMeFy</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="icon" href="help4.jpg" type="image/jpg" />
+  <script src="https://kit.fontawesome.com/your_kit_code.js" crossorigin="anonymous"></script>
   <style>
     .selected-service {
-      border: 3px solid #ef4444;
-      background-color: #ffe4e6;
+      border: 4px solid #ef4444 !important;
+      background-color: #fee2e2 !important;
+      transform: scale(1.05);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     }
     .service-img {
-      width: 96px;
-      height: 96px;
+      width: 80px;
+      height: 80px;
       object-fit: contain;
-      margin: 0 auto;
+      margin: 0 auto 10px auto;
+      transition: transform 0.3s ease;
+    }
+    .service-card:hover .service-img {
+      transform: scale(1.1);
+    }
+    .hover-scale {
+      transition: all 0.3s ease;
+    }
+    .hover-scale:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    /* Input Animations */
+    .input-field:focus {
+      outline: none;
+      border-color: #ef4444;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
     }
   </style>
 </head>
-<body class="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-700 min-h-screen py-10 px-4">
-  <div class="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-lg">
-    <h1 class="text-3xl font-bold text-center text-red-600 mb-6">Emergency Help Needed</h1>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-black min-h-screen py-12 px-4 flex flex-col items-center">
+  
+  <a href="index.html" class="absolute top-6 left-6 bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-full backdrop-blur-sm transition hover-scale">
+    <i class="fas fa-arrow-left mr-2"></i> Back to Home
+  </a>
+
+  <div class="max-w-5xl w-full mx-auto bg-white/95 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl mt-10" data-aos="zoom-in" data-aos-duration="800">
     
-    <form id="emergencyForm" class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-      <input type="text" id="nameInput" placeholder="Your Name" class="border p-3 rounded-xl w-full" required />
-      <input type="tel" id="phoneInput" placeholder="Phone Number" class="border p-3 rounded-xl w-full" required />
+    <div class="text-center mb-10" data-aos="fade-down" data-aos-delay="200">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 text-red-600 rounded-full mb-4 animate-pulse">
+        <i class="fas fa-exclamation-triangle text-4xl"></i>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight uppercase">Emergency SOS</h1>
+      <p class="text-gray-500 mt-2 text-lg">Fast, reliable, and instant community response.</p>
+    </div>
+    
+    <form id="emergencyForm" class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8" data-aos="fade-up" data-aos-delay="300">
+      <div>
+        <label class="block text-sm font-bold text-gray-700 mb-2">Victim's Name</label>
+        <input type="text" id="nameInput" placeholder="John Doe" class="input-field border-2 border-gray-200 p-4 rounded-xl w-full text-lg transition" required />
+      </div>
+      <div>
+        <label class="block text-sm font-bold text-gray-700 mb-2">Emergency Contact No.</label>
+        <input type="tel" id="phoneInput" placeholder="+91-XXXXX-XXXXX" class="input-field border-2 border-gray-200 p-4 rounded-xl w-full text-lg transition" required />
+      </div>
     </form>
 
-    <div class="mb-6 text-center">
-      <button onclick="detectLocation()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full">
-        Detect Location
+    <div class="mb-10 text-center p-6 bg-gray-50 rounded-2xl border border-gray-100" data-aos="fade-up" data-aos-delay="400">
+      <h3 class="text-lg font-bold text-gray-800 mb-4">Current Location</h3>
+      <button onclick="detectLocation()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover-scale transition w-full sm:w-auto">
+        <i class="fas fa-map-marker-alt mr-2"></i> Auto-Detect Precise Location
       </button>
-      <p id="locationDisplay" class="mt-2 text-sm text-gray-700"></p>
+      <p id="locationDisplay" class="mt-4 text-md font-mono text-gray-700 bg-white p-3 rounded-lg border border-gray-200 inline-block shadow-sm hidden"></p>
     </div>
 
-    <h2 class="text-xl font-semibold mb-4 text-center">Select the Emergency Service</h2>
-    <div id="services" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+    <div class="relative flex py-5 items-center">
+        <div class="flex-grow border-t border-gray-300"></div>
+        <span class="flex-shrink-0 mx-4 text-gray-400 font-bold uppercase tracking-widest text-sm">Select Required Service</span>
+        <div class="flex-grow border-t border-gray-300"></div>
+    </div>
 
-      <!-- Service Cards -->
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Ambulance">
+    <div id="services" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-6 mb-10">
+
+      <!-- Service Cards (Delayed Cascade Animation) -->
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Ambulance" data-aos="fade-up" data-aos-delay="100">
         <img src="https://img.icons8.com/color/96/ambulance.png" class="service-img" alt="Ambulance">
-        <h3 class="text-center font-bold text-lg">Ambulance</h3>
+        <h3 class="font-bold text-gray-800">Ambulance</h3>
       </div>
 
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Fire Brigade">
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Fire Brigade" data-aos="fade-up" data-aos-delay="150">
         <img src="https://img.icons8.com/color/96/fire-truck.png" class="service-img" alt="Fire Brigade">
-        <h3 class="text-center font-bold text-lg">Fire Brigade</h3>
+        <h3 class="font-bold text-gray-800">Fire Brigade</h3>
       </div>
 
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Electrician">
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Electrician" data-aos="fade-up" data-aos-delay="200">
         <img src="https://img.icons8.com/color/96/electricity.png" class="service-img" alt="Electrician">
-        <h3 class="text-center font-bold text-lg">Electrician</h3>
+        <h3 class="font-bold text-gray-800">Electrician</h3>
       </div>
 
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Plumber">
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Plumber" data-aos="fade-up" data-aos-delay="250">
         <img src="https://img.icons8.com/color/96/plumbing.png" class="service-img" alt="Plumber">
-        <h3 class="text-center font-bold text-lg">Plumber</h3>
+        <h3 class="font-bold text-gray-800">Plumber</h3>
       </div>
 
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Fuel on Car">
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Fuel on Car" data-aos="fade-up" data-aos-delay="300">
         <img src="https://img.icons8.com/color/96/gas-station.png" class="service-img" alt="Fuel on Car">
-        <h3 class="text-center font-bold text-lg">Fuel on Car</h3>
+        <h3 class="font-bold text-gray-800">Fuel Run</h3>
       </div>
 
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Girl Safety">
-        <img src="femalesafe.png" class="service-img" alt="Girl Safety">
-        <h3 class="text-center font-bold text-lg">Girl Safety</h3>
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Girl Safety" data-aos="fade-up" data-aos-delay="350">
+        <img src="femalesafe.png" class="service-img" alt="Girl Safety" onerror="this.src='https://img.icons8.com/color/96/security-checked.png'">
+        <h3 class="font-bold text-gray-800">Women Safety</h3>
       </div>
 
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Volunteers Nearby">
-        <img src="volen.png" class="service-img" alt="Volunteers Nearby">
-        <h3 class="text-center font-bold text-lg">Volunteers Nearby</h3>
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Volunteers Nearby" data-aos="fade-up" data-aos-delay="400">
+        <img src="volen.png" class="service-img" alt="Volunteers Nearby" onerror="this.src='https://img.icons8.com/color/96/groups.png'">
+        <h3 class="font-bold text-gray-800">Volunteers</h3>
       </div>
 
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Food on Car">
-        <img src="https://img.icons8.com/color/96/meal.png" class="service-img" alt="Food on Car">
-        <h3 class="text-center font-bold text-lg">Food on Car</h3>
-      </div>
-
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Mechanic on Car">
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Mechanic" data-aos="fade-up" data-aos-delay="450">
         <img src="https://img.icons8.com/color/96/car-service.png" class="service-img" alt="Mechanic on Car">
-        <h3 class="text-center font-bold text-lg">Mechanic on Car</h3>
+        <h3 class="font-bold text-gray-800">Mechanic</h3>
       </div>
 
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Tyre Puncture Repair">
-        <img src="https://img.icons8.com/color/96/tire.png" class="service-img" alt="Tyre Puncture Repair">
-        <h3 class="text-center font-bold text-lg">Tyre Puncture Repair</h3>
-      </div>
-
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Police">
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Police" data-aos="fade-up" data-aos-delay="500">
         <img src="https://img.icons8.com/color/96/policeman-male.png" class="service-img" alt="Police">
-        <h3 class="text-center font-bold text-lg">Police</h3>
+        <h3 class="font-bold text-gray-800">Police Support</h3>
       </div>
-
-      <div class="bg-gray-100 p-4 rounded-xl shadow hover:shadow-lg cursor-pointer" data-service="Grocery Delivery">
-        <img src="https://img.icons8.com/color/96/grocery-bag.png" class="service-img" alt="Grocery Delivery">
-        <h3 class="text-center font-bold text-lg">Grocery on Location</h3>
+      
+      <div class="service-card bg-white border-2 border-gray-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Medical" data-aos="fade-up" data-aos-delay="550">
+        <img src="https://img.icons8.com/color/96/medical-doctor.png" class="service-img" alt="Medical">
+        <h3 class="font-bold text-gray-800">First Aid</h3>
       </div>
 
     </div>
 
-    <div class="text-center">
-      <button onclick="submitRequest()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full text-lg">
-        Submit Request
+    <div class="text-center" data-aos="zoom-in" data-aos-delay="600">
+      <button onclick="submitRequest()" class="bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700 text-white font-black py-5 px-12 rounded-full text-xl shadow-2xl hover-scale transition w-full sm:w-auto uppercase tracking-wider">
+        <i class="fas fa-paper-plane mr-2"></i> Broadcast SOS Alert
       </button>
     </div>
   </div>
+  
+  <p class="text-gray-400 text-sm mt-8 pb-8">Helpmefy Emergency Grid System &copy; 2026</p>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    AOS.init({ once: true });
+
     let userLocation = "Not Detected";
 
     function detectLocation() {
+      const locDisplay = document.getElementById("locationDisplay");
+      locDisplay.classList.remove("hidden");
+      locDisplay.innerHTML = '<i class="fas fa-spinner fa-spin text-blue-500 mr-2"></i> Fetching satellites...';
+      
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-          const { latitude, longitude } = position.coords;
-          userLocation = `Lat: ${latitude.toFixed(4)}, Lon: ${longitude.toFixed(4)}`;
-          document.getElementById("locationDisplay").innerText = `📍 ${userLocation}`;
-        }, () => {
-          alert("Location access denied.");
-        });
+        setTimeout(() => { // Simulated delay for visual feedback
+          navigator.geolocation.getCurrentPosition(position => {
+            const { latitude, longitude } = position.coords;
+            userLocation = `Lat: ${latitude.toFixed(5)}, Lon: ${longitude.toFixed(5)}`;
+            locDisplay.innerHTML = `<i class="fas fa-check-circle text-green-500 mr-2"></i> 📍 ${userLocation}`;
+            locDisplay.classList.add("border-green-300", "bg-green-50");
+          }, () => {
+            locDisplay.innerHTML = '<i class="fas fa-times-circle text-red-500 mr-2"></i> Location access denied.';
+            locDisplay.classList.add("border-red-300", "bg-red-50");
+          });
+        }, 800);
       } else {
-        alert("Geolocation not supported by your browser.");
+        locDisplay.innerHTML = '<i class="fas fa-times-circle text-red-500 mr-2"></i> Geolocation not supported.';
       }
     }
 
     document.querySelectorAll('[data-service]').forEach(card => {
       card.addEventListener('click', () => {
-        document.querySelectorAll('[data-service]').forEach(c => c.classList.remove('selected-service'));
+        document.querySelectorAll('[data-service]').forEach(c => {
+          c.classList.remove('selected-service');
+        });
         card.classList.add('selected-service');
       });
     });
@@ -137,18 +189,23 @@
       const selectedCard = document.querySelector(".selected-service");
 
       if (!name || !phone || !selectedCard) {
-        alert("❗ Please fill in all fields and select a service.");
+        alert("❗ Please fill in your Name, Phone Number, and select a Service.");
         return;
+      }
+
+      if (userLocation === "Not Detected") {
+        const proceed = confirm("⚠️ We haven't detected your exact location yet. Are you sure you want to broadcast without precise GPS coordinates?");
+        if(!proceed) return;
       }
 
       const service = selectedCard.dataset.service;
 
       alert(
-        `✅ Thank you for your response!\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Location: ${userLocation}\n🛠️ Service: ${service}\n\n🚀 Our team will reach your location within 5 minutes.`
+        `🚨 SOS ALERT BROADCASTED SUCCESSFULLY 🚨\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Location: ${userLocation}\n🛠️ Required: ${service}\n\nOur decentralized network has notified all volunteers within a 5km radius. Stay calm, help is on the way.`
       );
 
-      // Redirect to another page
-      window.location.href = "emergencyafter.html";
+      // Redirect back to home after successful SOS
+      window.location.href = "index.html";
     }
   </script>
 </body>
