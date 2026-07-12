@@ -22,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $valid_password = 'password123';
 
     if ($email === $valid_email && $password === $valid_password) {
-        echo "Login successful!";
-        // Redirect to a protected page (like a dashboard) here
+        header("Location: afterlogin.html");
+        exit;
     } else {
         echo "Invalid credentials!";
     }
