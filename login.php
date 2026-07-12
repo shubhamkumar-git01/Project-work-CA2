@@ -1,31 +1,41 @@
 <?php
+session_start();
+require_once 'db.php';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve input values
-    $email = $_POST['email'];
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    // Validate email format
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format!";
-        exit;
+    if (empty($email) || empty($password)) {
+        die("Please fill all fields.");
     }
 
-    // Validate password (at least 8 characters)
-    if (strlen($password) < 8) {
-        echo "Password must be at least 8 characters!";
-        exit;
-    }
+    try {
+        // Fetch user from database
+        $stmt = $pdo->prepare("SELECT id, name, password FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
 
-    // Simulate database user validation (since no database)
-    // Assuming 'user@example.com' and 'password123' is a valid user
-    $valid_email = 'user@example.com';
-    $valid_password = 'password123';
+        if ($stmt->rowCount() == 1) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            // Verify password
+            if (password_verify($password, $user['password'])) {
+                // Password is correct, start session
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['user_name'] = $user['name'];
+                
+                header("Location: afterlogin.html");
+                exit;
+            } else {
+                echo "<script>alert('Invalid email or password.'); window.location.href='login.html';</script>";
+            }
+        } else {
+            echo "<script>alert('Invalid email or password.'); window.location.href='login.html';</script>";
+        }
 
-    if ($email === $valid_email && $password === $valid_password) {
-        header("Location: afterlogin.html");
-        exit;
-    } else {
-        echo "Invalid credentials!";
+    } catch (PDOException $e) {
+        die("Database Error: " . $e->getMessage());
     }
 }
 ?>

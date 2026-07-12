@@ -1,40 +1,57 @@
 <?php
+session_start();
+require_once 'db.php';
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve input values
-    $name = $_POST['name'];
-    $email = $_POST['email'];
+    $name = trim($_POST['name']);
+    $email = trim($_POST['email']);
     $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
 
-    // Validate name (only letters and spaces)
-    if (!preg_match("/^[a-zA-Z\s]+$/", $name)) {
-        echo "Name should only contain letters and spaces!";
-        exit;
+    // Validate inputs
+    if (empty($name) || empty($email) || empty($password)) {
+        die("Please fill all fields.");
     }
 
-    // Validate email format
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "Invalid email format!";
-        exit;
+        die("Invalid email format.");
     }
 
-    // Validate password length (must be at least 8 characters)
     if (strlen($password) < 8) {
-        echo "Password must be at least 8 characters!";
-        exit;
+        die("Password must be at least 8 characters long.");
     }
 
-    // Check if password and confirm password match
-    if ($password !== $confirm_password) {
-        echo "Passwords do not match!";
-        exit;
+    try {
+        // Check if email already exists
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() > 0) {
+            die("Email is already registered. Please login.");
+        }
+
+        // Hash the password securely
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        // Insert new user
+        $sql = "INSERT INTO users (name, email, password) VALUES (:name, :email, :password)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashed_password);
+
+        if ($stmt->execute()) {
+            // Log the user in immediately after signup
+            $_SESSION['user_id'] = $pdo->lastInsertId();
+            $_SESSION['user_name'] = $name;
+            header("Location: afterlogin.html");
+            exit;
+        } else {
+            die("Something went wrong. Please try again later.");
+        }
+
+    } catch (PDOException $e) {
+        die("Database Error: " . $e->getMessage());
     }
-
-    // Simulate user registration (since no database)
-    // In a real scenario, you would store this data in a database.
-
-    // Redirect to new page
-    header("Location: afterlogin.html");
-    exit();
 }
 ?>
