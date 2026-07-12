@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -216,33 +216,30 @@
       });
     });
 
-    function submitRequest() {
+        function submitRequest() {
       const name = document.getElementById("nameInput").value.trim();
       const phone = document.getElementById("phoneInput").value.trim();
       const selectedCard = document.querySelector(".selected-service");
 
       if (!name || !phone || !selectedCard) {
-        alert("❗ Please fill in your Name, Phone Number, and select a Service.");
+        alert("Please fill in your Name, Phone Number, and select a Service.");
         return;
       }
 
       if (userLocation === "Not Detected") {
-        const proceed = confirm("⚠️ We haven't detected your exact location yet. Are you sure you want to broadcast without precise GPS coordinates?");
+        const proceed = confirm("We haven't detected your exact location yet. Are you sure you want to broadcast without precise GPS coordinates?");
         if(!proceed) return;
       }
 
       const service = selectedCard.dataset.service;
 
-      alert(
-        `🚨 SOS ALERT BROADCASTED SUCCESSFULLY 🚨\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Location: ${userLocation}\n🛠️ Required: ${service}\n\nOur decentralized network has notified all volunteers within a 5km radius. Stay calm, help is on the way.`
-      );
-
-      // Redirect back to home after successful SOS
+      alert("SOS ALERT BROADCASTED SUCCESSFULLY\n\nName: " + name + "\nPhone: " + phone + "\nLocation: " + userLocation + "\nRequired: " + service + "\n\nOur network has notified all volunteers nearby. Help is on the way.");
       window.location.href = "index.html";
     }
   </script>
 </body>
 </html>
+
 
 
 
