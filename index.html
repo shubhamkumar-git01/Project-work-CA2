@@ -37,7 +37,18 @@
   .dropdown:hover .dropdown-menu {
     display: block;
   }
+  
+  /* Additional Pro Hover Animations */
+  .hover-scale {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .hover-scale:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  }
   </style>
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100 scroll-smooth">
   <div class="container min-h-screen bg-cover bg-[url('backgroundhome.png')] px-4 md:px-28 py-6">
@@ -63,9 +74,9 @@
       <img src="indiaflag.png" class="w-10 cursor-pointer" alt="India Flag" />
     </nav>
 
-    <div class="flex flex-col md:flex-row gap-10 items-center justify-between bg-white shadow-xl rounded-xl p-8">
+    <div class="flex flex-col md:flex-row gap-10 items-center justify-between bg-white shadow-xl rounded-xl p-8 hover-scale" data-aos="fade-up" data-aos-duration="1000">
       <div class="flex-1 space-y-4">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Helpmefy!! Simplifying Help, Amplifying Hope</h1>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900" data-aos="fade-right" data-aos-delay="200">Helpmefy!! Simplifying Help, Amplifying Hope</h1>
         <p class="text-gray-600">A place where we are always ready to help you.</p>
         <div class="flex flex-col md:flex-row justify-center items-center gap-6 w-full pt-4">
           <a href="login.html" class="flex-1 max-w-xs w-full">
@@ -93,8 +104,8 @@
   </div>
   <!-- //////////////////////// -->
   <!-- Single Image Carousel Section -->
-<div class="max-w-6xl mx-auto px-4 mt-[-60px] relative z-10"> <!-- removed bg-white to keep background visible -->
-  <div class="bg-white shadow-xl rounded-xl overflow-hidden w-full">
+<div class="max-w-6xl mx-auto px-4 mt-[-60px] relative z-10" data-aos="zoom-in" data-aos-duration="1000"> <!-- removed bg-white to keep background visible -->
+  <div class="bg-white shadow-xl rounded-xl overflow-hidden w-full hover-scale">
     <div class="overflow-hidden rounded-xl relative">
       <div id="carouselImages" class="flex transition-transform duration-500 ease-in-out w-full">
         <img src="helpfoot3.png" class="w-full object-cover h-64 sm:h-80 md:h-96" alt="Slide 1" />
@@ -109,7 +120,7 @@
     </div>
   </div>
 </div>
-<section id="contact" class="bg-white py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto">
+<section id="contact" class="bg-white py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto hover-scale" data-aos="fade-up" data-aos-duration="1000">
   <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Get in Touch with Us</h2>
   <div class="grid md:grid-cols-2 gap-10">
     <!-- Contact Methods -->
@@ -244,6 +255,10 @@
 
   // Ensure container resizes with screen
   window.addEventListener("resize", () => moveSlide(0));
+  </script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init();
   </script>
 </body>
 </html>
