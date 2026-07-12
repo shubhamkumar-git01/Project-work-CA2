@@ -3,58 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About the Developers</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <title>About the Developer | HelpMeFy</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="help4.jpg" type="image/jpg" />
+    <script src="https://kit.fontawesome.com/your_kit_code.js" crossorigin="anonymous"></script>
     <style>
         .profile-card {
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
         }
         .profile-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .hidden-info {
-            display: none;
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-purple-500 to-pink-400 min-h-screen">
+<body class="bg-gray-100 min-h-screen bg-cover bg-[url('backgroundhome.png')] py-12 px-4 flex flex-col items-center">
 
-    <!-- Header Section -->
-    <header class="bg-purple-800 text-white text-center py-6 shadow-lg">
-        <h1 class="text-3xl font-semibold">About the Developers</h1>
-    </header>
+    <div class="w-full max-w-2xl mx-auto flex justify-start mb-6" data-aos="fade-right">
+      <a href="index.html" class="bg-white text-blue-700 font-bold px-6 py-2 rounded-full shadow-md transition hover-scale">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Home
+      </a>
+    </div>
 
     <!-- Developer Profiles Section -->
-    <section class="container mx-auto p-6 grid grid-cols-1 max-w-2xl gap-6">
+    <section class="container mx-auto grid grid-cols-1 max-w-2xl gap-6">
         
         <!-- Shubham Kumar -->
-        <div class="profile-card bg-white shadow-xl rounded-2xl p-8 text-center transition duration-300 hover:shadow-2xl">
-            <img src="shbham.jpeg" alt="Shubham Kumar" class="w-40 h-40 mx-auto rounded-full mb-6 border-4 border-purple-500 object-cover">
-            <h2 class="text-3xl font-bold text-gray-800">Shubham Kumar</h2>
-            <p class="text-lg text-purple-600 font-semibold mb-4">Full Stack Developer & Founder</p>
-            <div class="text-left mt-6 text-base text-gray-700 leading-relaxed border-t pt-4">
-                <p>Shubham is the sole architect and lead developer behind the <strong>HelpMeFy</strong> platform. With a strong passion for solving real-world problems using technology, he engineered this community-driven platform to provide immediate peer-to-peer assistance during crises.</p>
-                <p class="mt-3">He designed and developed both the responsive frontend user interface and the secure PHP/MySQL backend architecture, ensuring a seamless and reliable experience for all users.</p>
+        <div class="profile-card bg-white shadow-2xl rounded-3xl p-8 md:p-12 text-center" data-aos="zoom-in" data-aos-duration="800">
+            <div class="relative w-40 h-40 mx-auto mb-6">
+                <div class="absolute inset-0 bg-blue-500 rounded-full animate-ping opacity-20"></div>
+                <img src="shbham.jpeg" alt="Shubham Kumar" class="relative w-40 h-40 rounded-full border-4 border-white shadow-xl object-cover hover-scale z-10">
             </div>
-            <div class="mt-6 flex justify-center space-x-4">
-                <a href="https://github.com/shubhamkumar-git01" target="_blank" class="px-6 py-2 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition">GitHub</a>
-                <a href="https://linkedin.com/in/shubham-kumar-sk01" target="_blank" class="px-6 py-2 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition">LinkedIn</a>
+            
+            <h2 class="text-4xl font-extrabold text-gray-900 tracking-tight">Shubham Kumar</h2>
+            <p class="text-xl text-blue-600 font-bold mt-2 mb-6 uppercase tracking-wider text-sm">Full Stack Developer & Founder</p>
+            
+            <div class="text-left mt-8 text-base text-gray-600 leading-relaxed bg-blue-50 p-6 rounded-2xl border border-blue-100 shadow-inner">
+                <p>Shubham is the sole architect and lead developer behind the <strong>HelpMeFy</strong> platform. With a strong passion for solving real-world problems using technology, he engineered this community-driven platform to provide immediate peer-to-peer assistance during crises.</p>
+                <p class="mt-4">He designed and developed both the responsive frontend user interface and the secure PHP/MySQL backend architecture, ensuring a seamless and reliable experience for all users.</p>
+            </div>
+            
+            <div class="mt-10 flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <a href="https://github.com/shubhamkumar-git01" target="_blank" class="px-8 py-3 bg-gray-900 text-white rounded-full font-bold hover:bg-gray-800 transition hover-scale shadow-lg">
+                    <i class="fab fa-github mr-2"></i> GitHub
+                </a>
+                <a href="https://linkedin.com/in/shubham-kumar-sk01" target="_blank" class="px-8 py-3 bg-blue-600 text-white rounded-full font-bold hover:bg-blue-700 transition hover-scale shadow-lg">
+                    <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                </a>
             </div>
         </div>
 
     </section>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Toggle the "Know More" section visibility
-        function toggleInfo(id) {
-            var info = document.getElementById(id);
-            if (info.classList.contains('hidden-info')) {
-                info.classList.remove('hidden-info');
-            } else {
-                info.classList.add('hidden-info');
-            }
-        }
+        AOS.init({ once: true });
     </script>
-
 </body>
 </html>
