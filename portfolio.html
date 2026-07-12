@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="output.css">
+  <script>
+    if (!localStorage.getItem('theme_forced_v3')) {
+      localStorage.theme = 'dark';
+      localStorage.setItem('theme_forced_v3', 'true');
+    }
+    if (localStorage.theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+    }
+  </script>
 </head>
 <body class="bg-amber-100">
     <div class="bg-white w-fit text-center p-10 rounded-3xl m-10 mx-auto relative overflow-hidden">
@@ -50,3 +70,5 @@
         </div>
 </body>
 </html>
+
+

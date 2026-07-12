@@ -38,42 +38,65 @@
       box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2);
     }
   </style>
+  <script>
+    if (!localStorage.getItem('theme_forced_v3')) {
+      localStorage.theme = 'dark';
+      localStorage.setItem('theme_forced_v3', 'true');
+    }
+    if (localStorage.theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+    }
+  </script>
 </head>
-<body class="bg-gray-100 min-h-screen bg-cover bg-[url('backgroundhome.png')] py-12 px-4 flex flex-col items-center overflow-x-hidden">
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen bg-cover bg-[url('backgroundhome.png')] dark:bg-blend-multiply dark:bg-gray-900/90 py-12 px-4 flex flex-col items-center overflow-x-hidden transition-colors duration-300">
   
   <div class="w-full max-w-6xl mx-auto flex justify-start mb-4" data-aos="fade-right">
-    <a href="index.html" class="bg-white/80 backdrop-blur-md text-pink-700 font-bold px-6 py-2 rounded-full shadow-md transition hover-scale">
-      <i class="fas fa-arrow-left mr-2"></i> Back to Home
-    </a>
-  </div>
+    <a href="index.html" class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md text-pink-700 dark:text-pink-400 font-bold px-6 py-2 rounded-full shadow-md transition hover-scale">
+      <i class="fas fa-arrow-left mr-2"></i> Back to Home</a>
+      <button onclick="toggleTheme()" class="bg-white dark:bg-gray-800 text-gray-800 dark:text-yellow-400 p-3 rounded-full shadow-md transition hover-scale border border-transparent dark:border-gray-700">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:inline"></i>
+      </button>
+    </div>
 
-  <div class="max-w-5xl w-full mx-auto bg-white/90 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl border border-white/50 relative z-10" data-aos="zoom-in" data-aos-duration="800">
+  <div class="max-w-5xl w-full mx-auto bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl p-8 md:p-12 rounded-3xl shadow-2xl border border-white/50 dark:border-gray-700 relative z-10 transition-colors duration-300" data-aos="zoom-in" data-aos-duration="800">
     
     <div class="text-center mb-10" data-aos="fade-down" data-aos-delay="100">
-      <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 text-red-600 rounded-full mb-4 animate-pulse shadow-inner">
+      <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 rounded-full mb-4 animate-pulse shadow-inner">
         <i class="fas fa-exclamation-triangle text-4xl"></i>
       </div>
-      <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight uppercase">Emergency SOS</h1>
-      <p class="text-gray-600 mt-3 text-lg font-medium">Fast, reliable, and instant community response.</p>
+      <h1 class="text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight uppercase">Emergency SOS</h1>
+      <p class="text-gray-600 dark:text-gray-300 mt-3 text-lg font-medium">Fast, reliable, and instant community response.</p>
     </div>
     
     <form id="emergencyForm" class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8" data-aos="fade-up" data-aos-delay="200">
       <div>
-        <label class="block text-sm font-bold text-gray-700 mb-2">Victim's Name</label>
-        <input type="text" id="nameInput" placeholder="John Doe" class="input-field border-2 border-gray-200 p-4 rounded-xl w-full text-lg transition bg-gray-50" required />
+        <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Victim's Name</label>
+        <input type="text" id="nameInput" placeholder="John Doe" class="input-field border-2 border-gray-200 dark:border-gray-600 p-4 rounded-xl w-full text-lg transition bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white" required />
       </div>
       <div>
-        <label class="block text-sm font-bold text-gray-700 mb-2">Emergency Contact No.</label>
-        <input type="tel" id="phoneInput" placeholder="+91-XXXXX-XXXXX" class="input-field border-2 border-gray-200 p-4 rounded-xl w-full text-lg transition bg-gray-50" required />
+        <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Emergency Contact No.</label>
+        <input type="tel" id="phoneInput" placeholder="+91-XXXXX-XXXXX" class="input-field border-2 border-gray-200 dark:border-gray-600 p-4 rounded-xl w-full text-lg transition bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white" required />
       </div>
     </form>
 
-    <div class="mb-10 text-center p-6 bg-pink-50/80 rounded-2xl border border-pink-100 shadow-inner" data-aos="fade-up" data-aos-delay="300">
-      <h3 class="text-lg font-bold text-gray-800 mb-4">Current Location</h3>
+    <div class="mb-10 text-center p-6 bg-pink-50/80 dark:bg-gray-800/80 rounded-2xl border border-pink-100 dark:border-gray-600 shadow-inner transition-colors" data-aos="fade-up" data-aos-delay="300">
+      <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Current Location</h3>
       <button onclick="detectLocation()" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg hover-scale transition w-full sm:w-auto">
         <i class="fas fa-map-marker-alt mr-2"></i> Auto-Detect Precise Location
       </button>
-      <p id="locationDisplay" class="mt-4 text-md font-mono text-gray-800 bg-white/80 p-3 rounded-lg border border-gray-200 inline-block shadow-sm hidden"></p>
+      <p id="locationDisplay" class="mt-4 text-md font-mono text-gray-800 dark:text-gray-200 bg-white/80 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600 inline-block shadow-sm hidden"></p>
     </div>
 
     <div class="relative flex py-5 items-center">
@@ -85,64 +108,64 @@
     <!-- EXACTLY 12 ITEMS FOR PERFECT GRID ALIGNMENT -->
     <div id="services" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-6 mb-10">
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Ambulance" data-aos="fade-up" data-aos-delay="100">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Ambulance" data-aos="fade-up" data-aos-delay="100">
         <img src="https://img.icons8.com/color/96/ambulance.png" class="service-img" alt="Ambulance">
-        <h3 class="font-bold text-gray-800">Ambulance</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Ambulance</h3>
       </div>
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Fire Brigade" data-aos="fade-up" data-aos-delay="150">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Fire Brigade" data-aos="fade-up" data-aos-delay="150">
         <img src="https://img.icons8.com/color/96/fire-truck.png" class="service-img" alt="Fire Brigade">
-        <h3 class="font-bold text-gray-800">Fire Brigade</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Fire Brigade</h3>
       </div>
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Police" data-aos="fade-up" data-aos-delay="200">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Police" data-aos="fade-up" data-aos-delay="200">
         <img src="https://img.icons8.com/color/96/policeman-male.png" class="service-img" alt="Police">
-        <h3 class="font-bold text-gray-800">Police Support</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Police Support</h3>
       </div>
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Girl Safety" data-aos="fade-up" data-aos-delay="250">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Girl Safety" data-aos="fade-up" data-aos-delay="250">
         <img src="femalesafe.png" class="service-img" alt="Girl Safety" onerror="this.src='https://img.icons8.com/color/96/security-checked.png'">
-        <h3 class="font-bold text-gray-800">Women Safety</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Women Safety</h3>
       </div>
       
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Medical" data-aos="fade-up" data-aos-delay="300">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Medical" data-aos="fade-up" data-aos-delay="300">
         <img src="https://img.icons8.com/color/96/medical-doctor.png" class="service-img" alt="Medical">
-        <h3 class="font-bold text-gray-800">First Aid</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">First Aid</h3>
       </div>
       
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Blood Donation" data-aos="fade-up" data-aos-delay="350">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Blood Donation" data-aos="fade-up" data-aos-delay="350">
         <img src="https://img.icons8.com/color/96/drop-of-blood.png" class="service-img" alt="Blood Required">
-        <h3 class="font-bold text-gray-800">Blood Required</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Blood Required</h3>
       </div>
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Electrician" data-aos="fade-up" data-aos-delay="400">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Electrician" data-aos="fade-up" data-aos-delay="400">
         <img src="https://img.icons8.com/color/96/electricity.png" class="service-img" alt="Electrician">
-        <h3 class="font-bold text-gray-800">Electrician</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Electrician</h3>
       </div>
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Plumber" data-aos="fade-up" data-aos-delay="450">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Plumber" data-aos="fade-up" data-aos-delay="450">
         <img src="https://img.icons8.com/color/96/plumbing.png" class="service-img" alt="Plumber">
-        <h3 class="font-bold text-gray-800">Plumber</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Plumber</h3>
       </div>
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Fuel on Car" data-aos="fade-up" data-aos-delay="500">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Fuel on Car" data-aos="fade-up" data-aos-delay="500">
         <img src="https://img.icons8.com/color/96/gas-station.png" class="service-img" alt="Fuel on Car">
-        <h3 class="font-bold text-gray-800">Fuel Run</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Fuel Run</h3>
       </div>
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Mechanic" data-aos="fade-up" data-aos-delay="550">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Mechanic" data-aos="fade-up" data-aos-delay="550">
         <img src="https://img.icons8.com/color/96/car-service.png" class="service-img" alt="Mechanic on Car">
-        <h3 class="font-bold text-gray-800">Mechanic</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Mechanic</h3>
       </div>
       
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Animal Rescue" data-aos="fade-up" data-aos-delay="600">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Animal Rescue" data-aos="fade-up" data-aos-delay="600">
         <img src="https://img.icons8.com/color/96/dog.png" class="service-img" alt="Animal Rescue">
-        <h3 class="font-bold text-gray-800">Animal Rescue</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Animal Rescue</h3>
       </div>
 
-      <div class="service-card bg-white/80 border-2 border-pink-100 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center" data-service="Volunteers Nearby" data-aos="fade-up" data-aos-delay="650">
+      <div class="service-card bg-white/80 dark:bg-gray-800/80 border-2 border-pink-100 dark:border-gray-700 p-5 rounded-2xl shadow-sm hover-scale cursor-pointer text-center transition-colors" data-service="Volunteers Nearby" data-aos="fade-up" data-aos-delay="650">
         <img src="volen.png" class="service-img" alt="Volunteers Nearby" onerror="this.src='https://img.icons8.com/color/96/groups.png'">
-        <h3 class="font-bold text-gray-800">Volunteers</h3>
+        <h3 class="font-bold text-gray-800 dark:text-gray-200">Volunteers</h3>
       </div>
 
     </div>
@@ -154,7 +177,7 @@
     </div>
   </div>
   
-  <p class="text-gray-600 font-medium text-sm mt-8 pb-8 relative z-10" data-aos="fade-up" data-aos-delay="800">Helpmefy Emergency Grid System &copy; 2026</p>
+  <p class="text-gray-600 dark:text-gray-400 font-medium text-sm mt-8 pb-8 relative z-10" data-aos="fade-up" data-aos-delay="800">Helpmefy Emergency Grid System &copy; 2026</p>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
@@ -220,3 +243,7 @@
   </script>
 </body>
 </html>
+
+
+
+

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,46 +49,73 @@
   </style>
   <!-- AOS Animation Library -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script>
+    if (!localStorage.getItem('theme_forced_v3')) {
+      localStorage.theme = 'dark';
+      localStorage.setItem('theme_forced_v3', 'true');
+    }
+    if (localStorage.theme === 'light') {
+      document.documentElement.classList.remove('dark');
+    } else {
+      document.documentElement.classList.add('dark');
+    }
+    function toggleTheme() {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+      }
+    }
+  </script>
 </head>
-<body class="bg-gray-100 scroll-smooth">
-  <div class="container min-h-screen bg-cover bg-[url('backgroundhome.png')] px-4 md:px-28 py-6">
+<body class="bg-gray-100 dark:bg-gray-900 scroll-smooth transition-colors duration-300">
+  <div class="container min-h-screen bg-cover bg-[url('backgroundhome.png')] dark:bg-blend-multiply dark:bg-gray-900/90 px-4 md:px-28 py-6">
     <nav class="flex items-center justify-between mb-10">
       <img src="logo.png" class="w-40 md:w-52 cursor-pointer" alt="Helpmefy Logo" />
-      <ul class="flex-1 text-center hidden md:flex justify-center space-x-6">
-        <li><a href="#" onclick="scrollToTop()" class="text-black hover:text-blue-600">Home</a></li>
+      <ul class="flex-1 text-center hidden md:flex justify-center space-x-6 items-center">
+        <li><a href="#" onclick="scrollToTop()" class="text-black dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-medium">Home</a></li>
         
         <!-- Updated About us with dropdown -->
         <li class="relative group">
-          <div class="text-black hover:text-blue-600 cursor-pointer">About us</div>
-          <ul class="absolute left-0 mt-1 w-48 bg-white border border-gray-200 rounded shadow-lg hidden group-hover:block z-50">
-            <li><a href="#about" class="block px-4 py-2 text-gray-700 hover:bg-blue-100 transition">About Helpmefy</a></li>
-            <li><a href="aboutdev.html" class="block px-4 py-2 text-gray-700 hover:bg-blue-100 transition">About the Developers</a></li>
-            <li><a href="#aim" class="block px-4 py-2 text-gray-700 hover:bg-blue-100 transition">Aim of Helpmefy</a></li>
+          <div class="text-black dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 cursor-pointer font-medium">About us</div>
+          <ul class="absolute left-0 mt-1 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg hidden group-hover:block z-50">
+            <li><a href="#about" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 transition">About Helpmefy</a></li>
+            <li><a href="aboutdev.html" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 transition">About the Developers</a></li>
+            <li><a href="#aim" class="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-100 dark:hover:bg-gray-700 transition">Aim of Helpmefy</a></li>
           </ul>
         </li>
         
     
-        <li><a href="#contact" class="text-black hover:text-blue-600">Contact</a></li>
+        <li><a href="#contact" class="text-black dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 font-medium">Contact</a></li>
         
-        <!-- Languages Dropdown -->
-        <li class="relative group">
-          <div class="text-black hover:text-blue-600 cursor-pointer flex items-center">
-            Languages <i class="fas fa-chevron-down ml-1 text-xs"></i>
-          </div>
-          <ul class="absolute right-0 mt-1 w-32 bg-white border border-gray-200 rounded shadow-lg hidden group-hover:block z-50">
-            <li><a href="#" class="block px-4 py-2 text-blue-600 bg-blue-50 font-bold transition">English (UK)</a></li>
-            <li><a href="#" onclick="alert('Hindi language support coming soon!')" class="block px-4 py-2 text-gray-700 hover:bg-blue-100 transition">Hindi</a></li>
-          </ul>
+        <!-- Languages Dropdown via Google Translate -->
+        <li class="relative mt-2 md:mt-0">
+          <div id="google_translate_element"></div>
+        </li>
+        <li>
+          <button onclick="toggleTheme()" class="text-gray-800 dark:text-yellow-400 hover:scale-110 transition-transform">
+            <i class="fas fa-moon dark:hidden"></i>
+            <i class="fas fa-sun hidden dark:inline"></i>
+          </button>
         </li>
       </ul>
-      <!-- Mobile version flag/language toggle can be simple -->
-      <img src="indiaflag.png" onclick="alert('Local regional support is active.')" class="w-10 cursor-pointer transition transform hover:scale-110 shadow-sm rounded-sm" alt="India Flag" />
+      <div class="flex items-center space-x-4">
+        <!-- Mobile version flag/language toggle can be simple -->
+        <img src="indiaflag.png" onclick="alert('Local regional support is active.')" class="w-10 cursor-pointer transition transform hover:scale-110 shadow-sm rounded-sm" alt="India Flag" />
+        <!-- Mobile Theme Toggle -->
+        <button onclick="toggleTheme()" class="md:hidden text-gray-800 dark:text-yellow-400 text-xl">
+          <i class="fas fa-moon dark:hidden"></i>
+          <i class="fas fa-sun hidden dark:inline"></i>
+        </button>
+      </div>
     </nav>
 
-    <div class="flex flex-col md:flex-row gap-10 items-center justify-between bg-white shadow-xl rounded-xl p-8 hover-scale" data-aos="fade-up" data-aos-duration="1000">
+    <div class="flex flex-col md:flex-row gap-10 items-center justify-between bg-white/90 dark:bg-gray-800/90 backdrop-blur-md shadow-2xl rounded-2xl p-8 border border-white/50 dark:border-gray-700 hover-scale" data-aos="fade-up" data-aos-duration="1000">
       <div class="flex-1 space-y-4">
-        <h1 class="text-4xl md:text-5xl font-bold text-gray-900" data-aos="fade-right" data-aos-delay="200">Helpmefy!! Simplifying Help, Amplifying Hope</h1>
-        <p class="text-gray-600">A place where we are always ready to help you.</p>
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white" data-aos="fade-right" data-aos-delay="200">Helpmefy!! Simplifying Help, Amplifying Hope</h1>
+        <p class="text-gray-600 dark:text-gray-300 text-lg">A place where we are always ready to help you.</p>
         <div class="flex flex-col md:flex-row justify-center items-center gap-6 w-full pt-4">
           <a href="login.html" class="flex-1 max-w-xs w-full">
             <button class="w-full px-6 py-4 bg-red-600 hover:bg-red-700 text-white text-lg font-bold rounded-full shadow-lg transition-all duration-300">
@@ -133,14 +160,14 @@
 </div>
 
 <!-- ABOUT HELPMEFY SECTION -->
-<section id="about" class="bg-white py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto hover-scale" data-aos="fade-right" data-aos-duration="1000">
+<section id="about" class="bg-white dark:bg-gray-800 py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto hover-scale border border-transparent dark:border-gray-700 transition-colors" data-aos="fade-right" data-aos-duration="1000">
   <div class="flex flex-col md:flex-row items-center gap-10">
     <div class="flex-1">
-      <h2 class="text-4xl font-extrabold text-gray-900 mb-6"><span class="text-blue-600">About</span> Helpmefy</h2>
-      <p class="text-gray-600 text-lg leading-relaxed mb-4">
+      <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6"><span class="text-blue-600 dark:text-blue-400">About</span> Helpmefy</h2>
+      <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-4">
         Helpmefy is a revolutionary platform designed to bridge the gap between those who need help and those who are willing to give it. Born from a vision to create a supportive community, we leverage technology to make peer-to-peer assistance fast, reliable, and accessible to everyone.
       </p>
-      <p class="text-gray-600 text-lg leading-relaxed">
+      <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
         Whether it's an emergency, a requirement for resources, or simply seeking guidance, our decentralized network ensures that no cry for help goes unheard.
       </p>
     </div>
@@ -151,17 +178,17 @@
 </section>
 
 <!-- AIM OF HELPMEFY SECTION -->
-<section id="aim" class="bg-gray-50 py-16 px-6 md:px-20 mt-10 rounded-xl shadow-inner max-w-6xl mx-auto hover-scale" data-aos="fade-left" data-aos-duration="1000">
+<section id="aim" class="bg-gray-50 dark:bg-gray-900/50 py-16 px-6 md:px-20 mt-10 rounded-xl shadow-inner max-w-6xl mx-auto hover-scale border border-transparent dark:border-gray-800 transition-colors" data-aos="fade-left" data-aos-duration="1000">
   <div class="flex flex-col md:flex-row-reverse items-center gap-10">
     <div class="flex-1">
-      <h2 class="text-4xl font-extrabold text-gray-900 mb-6">Our <span class="text-red-600">Aim</span></h2>
-      <p class="text-gray-600 text-lg leading-relaxed mb-4">
+      <h2 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-6">Our <span class="text-red-600 dark:text-red-500">Aim</span></h2>
+      <p class="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-4">
         Our primary aim is to cultivate a world where immediate help is just a click away. We strive to eliminate the friction in community support systems, making it effortless for volunteers to connect with victims of crises.
       </p>
       <ul class="space-y-3 mt-6">
-        <li class="flex items-center text-gray-700 font-semibold"><i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i> Rapid Response Times</li>
-        <li class="flex items-center text-gray-700 font-semibold"><i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i> 100% Transparency in Aid</li>
-        <li class="flex items-center text-gray-700 font-semibold"><i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i> Building a Global Community</li>
+        <li class="flex items-center text-gray-700 dark:text-gray-300 font-semibold"><i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i> Rapid Response Times</li>
+        <li class="flex items-center text-gray-700 dark:text-gray-300 font-semibold"><i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i> 100% Transparency in Aid</li>
+        <li class="flex items-center text-gray-700 dark:text-gray-300 font-semibold"><i class="fas fa-check-circle text-green-500 mr-3 text-xl"></i> Building a Global Community</li>
       </ul>
     </div>
     <div class="flex-1">
@@ -171,38 +198,38 @@
 </section>
 
 <!-- FEATURES SECTION -->
-<section id="features" class="bg-white py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto" data-aos="fade-up" data-aos-duration="1000">
-  <h2 class="text-4xl font-extrabold text-center text-gray-900 mb-12">Why Choose <span class="text-blue-600">Helpmefy?</span></h2>
+<section id="features" class="bg-white dark:bg-gray-800 py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto border border-transparent dark:border-gray-700 transition-colors" data-aos="fade-up" data-aos-duration="1000">
+  <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">Why Choose <span class="text-blue-600 dark:text-blue-400">Helpmefy?</span></h2>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="p-8 bg-blue-50 rounded-xl shadow hover-scale border border-blue-100 text-center">
-      <i class="fas fa-bolt text-5xl text-blue-500 mb-4 animate-bounce"></i>
-      <h3 class="text-2xl font-bold mb-2">Instant SOS</h3>
-      <p class="text-gray-600">Trigger alerts in seconds. Nearby volunteers are notified instantly to provide immediate assistance.</p>
+    <div class="p-8 bg-blue-50 dark:bg-gray-700/50 rounded-xl shadow hover-scale border border-blue-100 dark:border-gray-600 text-center transition-colors">
+      <i class="fas fa-bolt text-5xl text-blue-500 dark:text-blue-400 mb-4 animate-bounce"></i>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Instant SOS</h3>
+      <p class="text-gray-600 dark:text-gray-300">Trigger alerts in seconds. Nearby volunteers are notified instantly to provide immediate assistance.</p>
     </div>
-    <div class="p-8 bg-red-50 rounded-xl shadow hover-scale border border-red-100 text-center">
-      <i class="fas fa-shield-alt text-5xl text-red-500 mb-4 animate-pulse"></i>
-      <h3 class="text-2xl font-bold mb-2">Secure & Verified</h3>
-      <p class="text-gray-600">Our advanced backend ensures that all profiles and requests are strictly authenticated and protected.</p>
+    <div class="p-8 bg-red-50 dark:bg-gray-700/50 rounded-xl shadow hover-scale border border-red-100 dark:border-gray-600 text-center transition-colors">
+      <i class="fas fa-shield-alt text-5xl text-red-500 dark:text-red-400 mb-4 animate-pulse"></i>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Secure & Verified</h3>
+      <p class="text-gray-600 dark:text-gray-300">Our advanced backend ensures that all profiles and requests are strictly authenticated and protected.</p>
     </div>
-    <div class="p-8 bg-green-50 rounded-xl shadow hover-scale border border-green-100 text-center">
-      <i class="fas fa-hands-helping text-5xl text-green-500 mb-4"></i>
-      <h3 class="text-2xl font-bold mb-2">Peer Network</h3>
-      <p class="text-gray-600">Directly connect with those in need. No middlemen, just pure human-to-human support.</p>
+    <div class="p-8 bg-green-50 dark:bg-gray-700/50 rounded-xl shadow hover-scale border border-green-100 dark:border-gray-600 text-center transition-colors">
+      <i class="fas fa-hands-helping text-5xl text-green-500 dark:text-green-400 mb-4"></i>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Peer Network</h3>
+      <p class="text-gray-600 dark:text-gray-300">Directly connect with those in need. No middlemen, just pure human-to-human support.</p>
     </div>
   </div>
 </section>
-<section id="contact" class="bg-white py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto hover-scale" data-aos="fade-up" data-aos-duration="1000">
-  <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Get in Touch with Us</h2>
+<section id="contact" class="bg-white dark:bg-gray-800 py-16 px-6 md:px-20 mt-10 rounded-xl shadow-xl max-w-6xl mx-auto hover-scale border border-transparent dark:border-gray-700 transition-colors" data-aos="fade-up" data-aos-duration="1000">
+  <h2 class="text-3xl font-bold text-center text-gray-800 dark:text-white mb-10">Get in Touch with Us</h2>
   <div class="grid md:grid-cols-2 gap-10">
     <!-- Contact Methods -->
-    <div class="space-y-6 text-blue-900">
+    <div class="space-y-6 text-blue-900 dark:text-blue-100">
       <div class="flex items-center space-x-4">
         <i class="fab fa-whatsapp text-green-500 text-2xl"></i>
-        <p class="text-lg font-medium">WhatsApp us: <a href="https://wa.me/911000100095" class="text-blue-600 hover:underline">+91-1000100095</a></p>
+        <p class="text-lg font-medium">WhatsApp us: <a href="https://wa.me/911000100095" class="text-blue-600 dark:text-blue-400 hover:underline">+91-1000100095</a></p>
       </div>
       <div class="flex items-center space-x-4">
         <i class="fas fa-envelope text-red-500 text-2xl"></i>
-        <p class="text-lg font-medium">Email us: <a href="mailto:support@helpmefy.com" class="text-blue-600 hover:underline">support@helpmefy.com</a></p>
+        <p class="text-lg font-medium">Email us: <a href="mailto:support@helpmefy.com" class="text-blue-600 dark:text-blue-400 hover:underline">support@helpmefy.com</a></p>
       </div>
       <div class="flex items-center space-x-4">
         <i class="fas fa-fax text-indigo-500 text-2xl"></i>
@@ -221,9 +248,9 @@
     <!-- Contact Form -->
     <div>
       <form class="space-y-4">
-        <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-        <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-        <textarea placeholder="Your Message" rows="5" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+        <input type="text" placeholder="Your Name" class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <input type="email" placeholder="Your Email" class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+        <textarea placeholder="Your Message" rows="5" class="w-full p-3 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
         <button type="submit" class="bg-red-600 text-white px-6 py-3 rounded-full hover:bg-red-700 shadow-md font-bold">Send Message</button>
       </form>
     </div>
@@ -331,5 +358,19 @@
   <script>
     AOS.init();
   </script>
+  
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,hi',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+
+
+
