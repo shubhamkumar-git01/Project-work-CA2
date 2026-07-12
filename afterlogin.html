@@ -222,30 +222,11 @@
     document.getElementById("userName").textContent = userName;
     
     let currentSlide = 0;
-    function moveSlide(index) {
-      const slides = document.getElementById("carouselImages");
-      const width = slides.clientWidth;
-      currentSlide = index;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-      
-      const dots = event.target.parentElement.querySelectorAll("button");
-      dots.forEach(dot => {
-        dot.classList.remove("bg-blue-600");
-        dot.classList.add("bg-blue-300");
-      });
-      event.target.classList.remove("bg-blue-300");
-      event.target.classList.add("bg-blue-600");
-    }
-    
-    // Auto carousel
-    setInterval(() => {
-      let nextIndex = (currentSlide + 1) % 3;
-      moveSlide(nextIndex);
-      // Hacky way to update dots for auto carousel without event
+    function updateDots(index) {
       const dotsContainer = document.getElementById("carouselImages").parentElement.nextElementSibling;
       const dots = dotsContainer.querySelectorAll("button");
       dots.forEach((dot, i) => {
-        if(i === nextIndex) {
+        if(i === index) {
           dot.classList.remove("bg-blue-300");
           dot.classList.add("bg-blue-600");
         } else {
@@ -253,6 +234,19 @@
           dot.classList.add("bg-blue-300");
         }
       });
+    }
+
+    function moveSlide(index) {
+      const slides = document.getElementById("carouselImages");
+      currentSlide = index;
+      slides.style.transform = `translateX(-${index * 100}%)`;
+      updateDots(index);
+    }
+    
+    // Auto carousel
+    setInterval(() => {
+      let nextIndex = (currentSlide + 1) % 3;
+      moveSlide(nextIndex);
     }, 4000);
   </script>
 </body>
